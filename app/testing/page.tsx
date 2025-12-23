@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useRef } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import BackButton from '@/components/BackButton'
@@ -9,6 +9,7 @@ import Image from 'next/image'
 export default function TestingPage() {
   const router = useRouter()
   const nameInputRef = useRef<HTMLInputElement>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     if (nameInputRef.current) {
@@ -16,14 +17,40 @@ export default function TestingPage() {
     }
   }, [])
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const name = formData.get('name') as string
 
     if (name && name.trim()) {
-      sessionStorage.setItem('userName', name.trim())
-      router.push('/result')
+      setIsSubmitting(true)
+      try {
+        // Phase 1: POST /api/user - Create user account
+        const response = await fetch('/api/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: name.trim() }),
+        })
+
+        const data = await response.json()
+
+        if (response.ok && data.success) {
+          // Store user ID and name in sessionStorage
+          sessionStorage.setItem('userId', data.data.id)
+          sessionStorage.setItem('userName', data.data.name)
+          router.push('/result')
+        } else {
+          console.error('Error creating user:', data.error)
+          alert('Failed to create user account. Please try again.')
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error)
+        alert('An error occurred. Please try again.')
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
