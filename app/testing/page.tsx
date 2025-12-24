@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import BackButton from '@/components/BackButton'
-import Image from 'next/image'
 
 export default function TestingPage() {
   const router = useRouter()
@@ -57,11 +56,24 @@ export default function TestingPage() {
   return (
     <>
       <Header />
-      <div className="min-h-[90vh] flex flex-col items-center justify-center bg-white text-center">
-        <div className="absolute top-16 left-9 text-left">
+      <div className="min-h-[90vh] flex flex-col items-center justify-center bg-white text-center relative">
+        {/* Dotted geometric pattern background - subtle overlapping squares/diamonds with rotation */}
+        <div 
+          className="absolute inset-0 opacity-[0.15] animate-pattern-rotate"
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(160, 164, 171, 0.3) 15px, rgba(160, 164, 171, 0.3) 16px),
+              repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(160, 164, 171, 0.3) 15px, rgba(160, 164, 171, 0.3) 16px)
+            `,
+            backgroundSize: '30px 30px',
+            backgroundPosition: 'center',
+            transformOrigin: 'center center',
+          }}
+        />
+        <div className="absolute top-16 left-9 text-left z-10">
           <p className="font-semibold text-xs">TO START ANALYSIS</p>
         </div>
-        <div className="relative flex flex-col items-center justify-center mb-40 w-full h-full">
+        <div className="relative flex flex-col items-center justify-center mb-40 w-full h-full z-10">
           <p className="text-sm text-gray-400 tracking-wider uppercase mb-1">
             CLICK TO TYPE
           </p>
@@ -85,33 +97,6 @@ export default function TestingPage() {
               Submit
             </button>
           </form>
-          <Image
-            alt="Diamond Large"
-            loading="lazy"
-            width={762}
-            height={762}
-            className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-1/2 w-[480px] h-[480px] md:w-[762px] md:h-[762px] animate-spin-slow rotate-190"
-            style={{ color: 'transparent' }}
-            src="/Diamond-light-large.png"
-          />
-          <Image
-            alt="Diamond Medium"
-            loading="lazy"
-            width={682}
-            height={682}
-            className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-1/2 w-[400px] h-[400px] md:w-[682px] md:h-[682px] animate-spin-slower rotate-185"
-            style={{ color: 'transparent' }}
-            src="/Diamond-medium-medium.png"
-          />
-          <Image
-            alt="Diamond Small"
-            loading="lazy"
-            width={602}
-            height={602}
-            className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-1/2 w-[320px] h-[320px] md:w-[602px] md:h-[602px] animate-spin-slowest"
-            style={{ color: 'transparent' }}
-            src="/Diamond-dark-small.png"
-          />
         </div>
         <div className="absolute bottom-38.5 md:bottom-8 w-full flex justify-between md:px-9 px-13">
           <BackButton href="/" />

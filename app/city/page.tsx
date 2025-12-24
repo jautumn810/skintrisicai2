@@ -26,8 +26,8 @@ export default function CityPage() {
       try {
         // Store city in sessionStorage
         sessionStorage.setItem('userCity', city.trim())
-        // Navigate to result page
-        router.push('/result')
+        // Navigate to processing page
+        router.push('/processing')
       } catch (error) {
         console.error('Error submitting city:', error)
         alert('An error occurred. Please try again.')
