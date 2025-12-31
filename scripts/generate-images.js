@@ -15,6 +15,12 @@ if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir, { recursive: true });
 }
 
+// Create icons directory if it doesn't exist
+const iconsDir = path.join(publicDir, 'icons');
+if (!fs.existsSync(iconsDir)) {
+  fs.mkdirSync(iconsDir, { recursive: true });
+}
+
 // Function to create SVG diamond shape
 function createDiamondSVG(size, strokeColor = '#A0A4AB', strokeWidth = 1) {
   const center = size / 2;
@@ -73,6 +79,50 @@ function createCameraIconSVG(size = 136) {
 </svg>`;
 }
 
+// Function to create camera aperture icon - solid black circle with white hexagonal opening
+function createCameraApertureSVG(size = 180) {
+  const center = size / 2;
+  const radius = size / 2 - 2;
+  
+  // Create 6 overlapping triangular blades that form the aperture
+  const blades = [];
+  const hexRadius = radius * 0.35; // Size of the hexagonal opening
+  
+  for (let i = 0; i < 6; i++) {
+    const baseAngle = (i * Math.PI) / 3;
+    // Each blade is a triangle from the hexagon edge to the circle edge
+    const hexAngle1 = baseAngle + Math.PI / 6;
+    const hexAngle2 = baseAngle + Math.PI / 3 + Math.PI / 6;
+    
+    const hexX1 = center + Math.cos(hexAngle1) * hexRadius;
+    const hexY1 = center + Math.sin(hexAngle1) * hexRadius;
+    const hexX2 = center + Math.cos(hexAngle2) * hexRadius;
+    const hexY2 = center + Math.sin(hexAngle2) * hexRadius;
+    
+    // Outer point of the blade (on the circle)
+    const outerAngle = baseAngle + Math.PI / 6;
+    const outerX = center + Math.cos(outerAngle) * radius;
+    const outerY = center + Math.sin(outerAngle) * radius;
+    
+    blades.push(`<path d="M ${hexX1} ${hexY1} L ${hexX2} ${hexY2} L ${outerX} ${outerY} Z" fill="#111"/>`);
+  }
+  
+  // Create hexagonal center opening (white)
+  const hexPoints = [];
+  for (let i = 0; i < 6; i++) {
+    const angle = (i * Math.PI) / 3 + Math.PI / 6;
+    const x = center + Math.cos(angle) * hexRadius;
+    const y = center + Math.sin(angle) * hexRadius;
+    hexPoints.push(`${x},${y}`);
+  }
+  
+  return `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="${center}" cy="${center}" r="${radius}" fill="#111"/>
+  ${blades.join('\n  ')}
+  <polygon points="${hexPoints.join(' ')}" fill="#fff"/>
+</svg>`;
+}
+
 // Function to create SVG gallery icon (landscape with sun)
 function createGalleryIconSVG(size = 136) {
   const center = size / 2;
@@ -113,6 +163,9 @@ const imagesToCreate = [
   { name: 'camera-icon.png', svg: createCameraIconSVG(136), width: 136, height: 136 },
   { name: 'gallery-icon.png', svg: createGalleryIconSVG(136), width: 136, height: 136 },
   
+  // Camera aperture icon for permissions page
+  { name: 'icons/camera-aperture.png', svg: createCameraApertureSVG(180), width: 180, height: 180 },
+  
   // Lines
   { name: 'ResScanLine.png', svg: createLineSVG(66, 59), width: 66, height: 59 },
   { name: 'ResGalleryLine.png', svg: createLineSVG(66, 59), width: 66, height: 59 },
@@ -124,6 +177,11 @@ console.log('Generating PNG images...\n');
 async function generateImages() {
   for (const { name, svg, width, height } of imagesToCreate) {
     const filePath = path.join(publicDir, name);
+    // Ensure directory exists for nested paths
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     
     try {
       // Convert SVG to PNG

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your City - Skinstric</title>
+  <title>Your Region - Skinstric</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -30,20 +30,9 @@
     </div>
 
     <div class="blinking-input-container">
-      <div class="click-to-type-hint">click to type</div>
-      <input
-        type="text"
-        id="city-input"
-        class="blinking-input-hidden"
-        autocomplete="off"
-        spellcheck="false"
-      />
-      <div class="text-underline-wrapper">
-        <div class="blinking-input-display" id="city-display">
-          <span id="city-text">your city name</span>
-          <span class="center-caret caret-bottom" id="city-caret"></span>
-        </div>
-        <div class="underline"></div>
+      <div class="thank-you-message">
+        <div class="thank-you-line">Thank you !</div>
+        <div class="thank-you-line">Proceed for the next step.</div>
       </div>
     </div>
 
@@ -54,9 +43,16 @@
         <span>BACK</span>
       </button>
     </div>
+
+    <div class="right-fixed">
+      <button type="button" class="diamond-btn white" id="proceed-btn">
+        <span>PROCEED</span>
+      </button>
+    </div>
   </div>
 
   <script type="module" src="/js/common.js"></script>
-  <script type="module" src="/js/pages/city.js"></script>
+  <script type="module" src="/js/pages/region.js"></script>
 </body>
 </html>
+

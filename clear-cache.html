@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear Cache Utility</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+</head>
+<body>
+  <h1>Clearing All Caches...</h1>
+  <script>
+    (async function() {
+      // Clear all caches
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        for (let name of cacheNames) {
+          await caches.delete(name);
+          console.log('Deleted cache:', name);
+        }
+      }
+      
+      // Unregister service workers
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (let registration of registrations) {
+          await registration.unregister();
+          console.log('Unregistered service worker');
+        }
+      }
+      
+      // Clear localStorage
+      localStorage.clear();
+      console.log('Cleared localStorage');
+      
+      // Clear sessionStorage
+      sessionStorage.clear();
+      console.log('Cleared sessionStorage');
+      
+      // Clear IndexedDB
+      if ('indexedDB' in window) {
+        indexedDB.databases().then(databases => {
+          databases.forEach(db => {
+            indexedDB.deleteDatabase(db.name);
+            console.log('Deleted database:', db.name);
+          });
+        });
+      }
+      
+      document.body.innerHTML = '<h1>✅ All caches cleared!</h1><p>Redirecting in 2 seconds...</p>';
+      
+      setTimeout(() => {
+        window.location.href = '/?nocache=' + Date.now();
+      }, 2000);
+    })();
+  </script>
+</body>
+</html>
+

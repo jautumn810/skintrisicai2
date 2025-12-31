@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demographics - Skinstric</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a href="../index.html" class="brand">SKINSTRIC</a>
+    <a href="/" class="brand">SKINSTRIC</a>
     <div class="header-bracket-container">
-      <img src="/public/Rectangle_2710.png" alt="[" class="header-bracket-img">
+      <img src="/Rectangle_2710.png" alt="[" class="header-bracket-img">
       <span class="section">INTRO</span>
-      <img src="/public/Rectangle_2711.png" alt="]" class="header-bracket-img">
+      <img src="/Rectangle_2711.png" alt="]" class="header-bracket-img">
     </div>
     <button class="enter-code">ENTER CODE</button>
   </header>
@@ -23,50 +23,38 @@
       <div class="dem-h1">DEMOGRAPHICS</div>
       <div class="dem-sub">PREDICTED RACE &amp; AGE</div>
 
-      <div class="dem-cards">
-        <div class="dem-card black" id="race-card">
-          <div class="topline" id="race-value">-</div>
-          <div class="bottomline">RACE</div>
-        </div>
+      <div class="dem-top-section">
+        <div class="dem-cards">
+          <div class="dem-card black" id="race-card">
+            <div class="topline" id="race-value">-</div>
+            <div class="bottomline">RACE</div>
+          </div>
 
-        <div class="dem-card" id="age-card">
-          <div class="topline dem-card-topline-dark" id="age-value">-</div>
-          <div class="bottomline dem-card-bottomline-dark">AGE</div>
-        </div>
+          <div class="dem-card" id="age-card">
+            <div class="topline dem-card-topline-dark" id="age-value">-</div>
+            <div class="bottomline dem-card-bottomline-dark">AGE</div>
+          </div>
 
-        <div class="dem-card" id="gender-card">
-          <div class="topline dem-card-topline-dark" id="gender-value">-</div>
-          <div class="bottomline dem-card-bottomline-dark">SEX</div>
+          <div class="dem-card" id="gender-card">
+            <div class="topline dem-card-topline-dark" id="gender-value">-</div>
+            <div class="bottomline dem-card-bottomline-dark">SEX</div>
+          </div>
         </div>
-      </div>
-
-      <div class="dem-arc-block">
-        <div id="arc-meter"></div>
-        <div class="dem-arc-instruction">If A.I. estimate is wrong, select the correct one.</div>
-      </div>
-
-      <div class="dem-table dem-table-spacer">
-        <div class="dem-table-head">
-          <div>RACE</div>
-          <div class="dem-table-head-right">A.I. CONFIDENCE</div>
+        <div class="dem-arc-side">
+          <div class="dem-arc-label" id="race-label"></div>
+          <div class="dem-arc-block">
+            <div id="race-arc-meter"></div>
+          </div>
         </div>
-        <div id="race-table"></div>
-      </div>
-
-      <div class="dem-table dem-table-spacer">
-        <div class="dem-table-head">
-          <div>AGE</div>
-          <div class="dem-table-head-right">A.I. CONFIDENCE</div>
+        <div class="dem-table-side">
+          <div class="dem-table">
+            <div class="dem-table-head">
+              <div>RACE</div>
+              <div class="dem-table-head-right">A.I. CONFIDENCE</div>
+            </div>
+            <div id="race-table"></div>
+          </div>
         </div>
-        <div id="age-table"></div>
-      </div>
-
-      <div class="dem-table dem-table-spacer">
-        <div class="dem-table-head">
-          <div>GENDER</div>
-          <div class="dem-table-head-right">A.I. CONFIDENCE</div>
-        </div>
-        <div id="gender-table"></div>
       </div>
     </div>
 
@@ -74,13 +62,13 @@
       <button type="button" class="diamond-btn white" data-back-button>
         <span>BACK</span>
       </button>
-      <button type="button" class="diamond-btn white" data-home-button="../index.html">
+      <button type="button" class="diamond-btn white" data-home-button="/">
         <span>HOME</span>
       </button>
     </div>
   </div>
 
-  <script type="module" src="../js/common.js"></script>
-  <script type="module" src="../js/pages/demographics.js"></script>
+  <script type="module" src="/js/common.js"></script>
+  <script type="module" src="/js/pages/demographics.js"></script>
 </body>
 </html>

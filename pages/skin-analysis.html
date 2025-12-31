@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Analysis - Skinstric</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-left-group">
+      <div class="brand-line">
+        <a href="/" class="brand">SKINSTRIC</a>
+        <div class="header-bracket-container">
+          <img src="/Rectangle_2710.png" alt="[" class="header-bracket-img">
+          <span class="section">INTRO</span>
+          <img src="/Rectangle_2711.png" alt="]" class="header-bracket-img">
+        </div>
+      </div>
+      <div class="start-analysis-header">TO START ANALYSIS</div>
+    </div>
+    <div class="header-right-group">
+      <button class="enter-code">ENTER CODE</button>
+      <div class="header-preview-container">
+        <div class="header-preview-label">Preview</div>
+        <div class="header-rectangle">
+          <img id="preview-image" class="header-preview-image" alt="Preview" style="display: none;">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <div class="ai-wrap">
+      <div class="skin-analysis-diamonds">
+        <div class="skin-analysis-diamond" style="--r: 12deg;"></div>
+        <div class="skin-analysis-diamond d2" style="--r: 28deg;"></div>
+        <div class="skin-analysis-content">
+          <div class="skin-analysis-text">preparing your analysis</div>
+          <div class="skin-analysis-loading">
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-fixed">
+      <button type="button" class="diamond-btn white" data-back-button>
+        <span>BACK</span>
+      </button>
+    </div>
+
+    <div class="right-fixed">
+      <button type="button" class="diamond-btn black" id="proceed-btn">
+        <span>PROCEED</span>
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="/js/common.js"></script>
+  <script type="module" src="/js/pages/skin-analysis.js"></script>
+</body>
+</html>
+

@@ -4,23 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Introduce Yourself - Skinstric</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a href="../index.html" class="brand">SKINSTRIC</a>
-    <div class="header-bracket-container">
-      <img src="/public/Rectangle_2710.png" alt="[" class="header-bracket-img">
-      <span class="section">INTRO</span>
-      <img src="/public/Rectangle_2711.png" alt="]" class="header-bracket-img">
+    <div class="header-left-group">
+      <div class="brand-line">
+        <a href="/" class="brand">SKINSTRIC</a>
+        <div class="header-bracket-container">
+          <img src="/Rectangle_2710.png" alt="[" class="header-bracket-img">
+          <span class="section">INTRO</span>
+          <img src="/Rectangle_2711.png" alt="]" class="header-bracket-img">
+        </div>
+      </div>
+      <div class="start-analysis-header">TO START ANALYSIS</div>
     </div>
     <button class="enter-code">ENTER CODE</button>
   </header>
 
   <div class="input-page">
-    <div class="input-top">TO START ANALYSIS</div>
+    <!-- Rotating background squares - nested, centered behind text -->
+    <div class="intro-square-container">
+      <div class="intro-rotating-square intro-square-outer"></div>
+      <div class="intro-rotating-square intro-square-inner"></div>
+    </div>
 
     <div class="blinking-input-container">
+      <div class="click-to-type-hint">click to type</div>
       <input
         type="text"
         id="name-input"
@@ -28,13 +38,14 @@
         autocomplete="off"
         spellcheck="false"
       />
-      <div class="blinking-input-display" id="name-display">
-        <span id="name-text">Introduce Yourself</span>
-        <span class="center-caret caret-bottom" id="name-caret"></span>
+      <div class="text-underline-wrapper">
+        <div class="blinking-input-display" id="name-display">
+          <span id="name-text">Introduce Yourself</span>
+          <span class="center-caret caret-bottom" id="name-caret"></span>
+        </div>
+        <div class="underline"></div>
       </div>
     </div>
-
-    <div class="underline"></div>
 
     <div id="error-message" class="error-message hidden"></div>
 
@@ -43,15 +54,9 @@
         <span>BACK</span>
       </button>
     </div>
-
-    <div class="right-fixed">
-      <button type="button" class="diamond-btn black" id="proceed-btn">
-        <span>PROCEED</span>
-      </button>
-    </div>
   </div>
 
-  <script type="module" src="../js/common.js"></script>
-  <script type="module" src="../js/pages/introduce.js"></script>
+  <script type="module" src="/js/common.js"></script>
+  <script type="module" src="/js/pages/introduce.js"></script>
 </body>
 </html>

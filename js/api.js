@@ -16,17 +16,35 @@ export async function postPhaseOne(payload) {
 }
 
 export async function postPhaseTwo(payload) {
+  console.log('🔵 postPhaseTwo called with payload:', {
+    keys: Object.keys(payload),
+    hasImage: 'Image' in payload,
+    hasimage: 'image' in payload,
+    ImageLength: payload.Image?.length || payload.image?.length || 0
+  });
+  
+  const body = JSON.stringify(payload);
+  console.log('🔵 Request body size:', body.length);
+  console.log('🔵 Request body preview (first 200 chars):', body.substring(0, 200));
+  
   const res = await fetch(PHASE_TWO, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: body,
   });
+
+  console.log('🔵 API response status:', res.status);
+  console.log('🔵 API response ok:', res.ok);
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");
+    console.error('❌ API error response:', text);
     throw new Error(`Phase 2 API failed (${res.status}): ${text}`);
   }
-  return res.json();
+  
+  const json = await res.json();
+  console.log('✅ API success response:', json);
+  return json;
 }
 
 export async function fileToBase64(file) {
